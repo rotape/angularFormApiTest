@@ -1,4 +1,4 @@
-<div class="form">
+<div  class="form">
   <h2 class="first">Tus datos personales</h2>
   <div class="form_element first"><label for="first-name"></label>
     <input
@@ -7,6 +7,7 @@
       name="firstName"
       id="first-name"
       placeholder="Name"
+      [(ngModel)]="user.name"
     />
   </div>
   <div class="form_element second"><label for="surname"></label>
@@ -16,6 +17,7 @@
       name="surname"
       id="surname"
       placeholder="Surname"
+      [(ngModel)]="user.surname"
     />
   </div>
   <div class="form_date form_text--left form_element">
@@ -56,6 +58,7 @@
       class="form_input"
       name="document-number"
       id="document-number"
+      [(ngModel)]="user.identification"
     />
   </div>
   <div class="first form_element form_element--date">
@@ -99,6 +102,7 @@
       name="email"
       id="email"
       placeholder="email"
+      [(ngModel)]="user.email"
     />
   </div>
   <div class="form_element form_element--second">
@@ -111,10 +115,12 @@
       placeholder="repite el email"
     />
   </div>
+  <div class="form_separator full"><a (click)="updateUserData()" href="#">Modificar tus datos</a></div>
   <h2>Contraseña</h2>
   <div class="form_element first">
     <label class="form_label" for="password">Contraseña</label>
-    <input class="form_input" type="password" name="password" id="password" />
+    <input class="form_input" type="password" name="password" id="password"
+    />
   </div>
   <div class="form_element second">
     <label class="form_label" for="repeat-password">Repetir contraseña</label>
@@ -123,6 +129,7 @@
       type="password"
       name="repeat-password"
       id="repeat-password"
+      [(ngModel)]="user.password"
     />
   </div>
   <h2>Dirección</h2>
