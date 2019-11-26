@@ -8,17 +8,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./basic-data-form.component.less']
 })
 export class BasicDataFormComponent implements OnInit {
-  user: User /*= {
-    name: '',
-    surname: '',
-    bornDate: { day: 1, month: 12, year: 1992 },
-    identification: '123456789Z',
-    document_type: 'DNI',
-    gender: '',
-    email: '',
-    password: ''
-  }*/;
-  form: User;
+  user: User ;
+  documents = ['dni', 'passport'];
+  genders = ['man', 'woman', 'noanswer'] ;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {

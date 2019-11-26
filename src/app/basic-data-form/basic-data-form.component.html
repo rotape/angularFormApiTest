@@ -48,9 +48,8 @@
     <label class="form_label full" for="document"
       >Documento identificativo</label
     >
-    <select class="form_input first" name="document" id="document">
-      <option class="form_input" value="DNI">DNI</option>
-      <option class="form_input" value="Passport">Pasaporte</option>
+    <select class="form_input first" [(ngModel)]="user.document_type">
+      <option *ngFor="let document of documents" class="form_input" [ngValue]="document">{{document}}</option>
     </select>
     <input
       class="form_input second"
@@ -69,7 +68,8 @@
         type="radio"
         name="gender"
         id="mujer"
-        value="mujer"
+        value="woman"
+        [(ngModel)]="user.gender"
       />
       <label for="Mujer">Mujer</label>
     </div>
@@ -79,7 +79,8 @@
         type="radio"
         name="gender"
         id="hombre"
-        value="hombre"
+        value="man"
+         [(ngModel)]="user.gender"
       />
       <label for="hombre">Hombre</label>
     </div>
@@ -90,6 +91,7 @@
         name="gender"
         id="noanswer"
         value="noanswer"
+        [(ngModel)]="user.gender"
       />
       <label for="noanswer">Prefiero no contestar</label>
     </div>
