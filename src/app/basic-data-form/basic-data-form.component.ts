@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
-import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-basic-data-form',
   templateUrl: './basic-data-form.component.html',
@@ -11,6 +10,7 @@ export class BasicDataFormComponent implements OnInit {
   user: User;
   documents = ['dni', 'passport'];
   genders = ['man', 'woman', 'noanswer'];
+  mustMatchError = false;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -21,6 +21,14 @@ export class BasicDataFormComponent implements OnInit {
     this.http.put(`https://my-json-server.typicode.com/volkz/technical-form/users/${this.user.id}`, this.user).subscribe((res: User) => {
       this.user = res;
     });
+  }
+
+  checkMatchPasswords() {
+      if (this.user.password !== this.user.matchingPassword) {
+        this.mustMatchError = true;
+      } else {
+        this.mustMatchError = false;
+      }
   }
 
   updateUserPassword() {
