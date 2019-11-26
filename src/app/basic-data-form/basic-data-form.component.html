@@ -134,6 +134,7 @@
       [(ngModel)]="user.password"
     />
   </div>
+   <div class="form_separator full"><a (click)="updateUserPassword()" href="#">Modificar Contraseña</a></div>
   <h2>Dirección</h2>
   <div class="form_element first">
     <label for="address"></label>
@@ -143,6 +144,7 @@
       name="address"
       id="address"
       placeholder="dirección"
+       [(ngModel)]="user.address"
     />
   </div>
 </div>

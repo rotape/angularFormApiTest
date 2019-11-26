@@ -8,9 +8,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./basic-data-form.component.less']
 })
 export class BasicDataFormComponent implements OnInit {
-  user: User ;
+  user: User;
   documents = ['dni', 'passport'];
-  genders = ['man', 'woman', 'noanswer'] ;
+  genders = ['man', 'woman', 'noanswer'];
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -18,7 +18,14 @@ export class BasicDataFormComponent implements OnInit {
   }
 
   updateUserData() {
-     this.http.put(`https://my-json-server.typicode.com/volkz/technical-form/users/${this.user.id}`, this.user).subscribe((res: User) => {
+    this.http.put(`https://my-json-server.typicode.com/volkz/technical-form/users/${this.user.id}`, this.user).subscribe((res: User) => {
+      this.user = res;
+    });
+  }
+
+  updateUserPassword() {
+    this.http.put(`https://my-json-server.typicode.com/volkz/technical-form/users/${this.user.id}`,
+    this.user).subscribe((res: User) => {
       this.user = res;
     });
   }

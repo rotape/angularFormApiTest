@@ -1,4 +1,5 @@
 export interface User {
+    id: number;
     name: string;
     surname: string;
     bornDate: { day: number, month: number, year: number };
@@ -7,4 +8,5 @@ export interface User {
     gender: string;
     email: string;
     password: string;
+    address: string;
 }
