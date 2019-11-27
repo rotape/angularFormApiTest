@@ -13,14 +13,6 @@
         flex-direction: column;
         flex-wrap: wrap;
     }
-    &_text--left{
-        grid-column-start: 1;
-        grid-column-end: 2;
-    }
-    &_text--right {
-        grid-column-start: 2;
-        grid-column-end: -1;
-    }
     &_element{
         display: grid;
         grid-column-gap: 0.7em;
@@ -67,12 +59,19 @@
       grid-column-start: -1;
       grid-column-end: 1;
       text-transform: uppercase;
+      color: #000000;
       padding-bottom: 0.5em;
       border-bottom: 1px solid #000000;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      background: none;
       display: flex;
       justify-content: flex-end;
+      cursor: pointer;
   }
   &--error {
+      color: #ff4220;
       border-color: #ff4220;
   }
 }

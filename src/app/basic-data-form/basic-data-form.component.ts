@@ -23,12 +23,20 @@ export class BasicDataFormComponent implements OnInit {
     });
   }
 
-  checkMatchPasswords() {
-      if (this.user.password !== this.user.matchingPassword) {
-        this.mustMatchError = true;
+  checkEmails() {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (this.user.email !== this.user.compareEmail || !regex.test(this.user.email)) {
+        this.emailError = true;
       } else {
-        this.mustMatchError = false;
+        this.emailError = false;
       }
+  }
+  checkPasswords() {
+    if(this.user.password !== this.user.matchingPassword) {
+      this.mustMatchError = true;
+    } else {
+        this.mustMatchError = false;
+    }
   }
 
   updateUserPassword() {
@@ -43,7 +51,6 @@ export class BasicDataFormComponent implements OnInit {
     user ? value = user : value = 1;
     this.http.get(`https://my-json-server.typicode.com/volkz/technical-form/users/${value}`).subscribe((res: User) => {
       this.user = res;
-      console.log(this.user);
     });
 
   }

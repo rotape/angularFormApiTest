@@ -1,21 +1,21 @@
 <div class="form">
   <h2 class="first">Tus datos personales</h2>
   <div class="form_element first"><label for="first-name"></label>
-    <input class="form_input" type="text" name="firstName" id="first-name" placeholder="Name" [(ngModel)]="user.name" />
+    <input class="form_input" type="text" name="firstName" id="first-name" placeholder="Name" [(ngModel)]="user.name" required/>
   </div>
   <div class="form_element second"><label for="surname"></label>
     <input class="form_input" type="text" name="surname" id="surname" placeholder="Surname"
-      [(ngModel)]="user.surname" />
+      [(ngModel)]="user.surname" required/>
   </div>
   <div class="form_date form_text--left form_element">
     <label class="form_label full" for="date">Fecha de nacimiento</label>
-    <input class="form_input first" type="number" name="day" id="day" placeholder="dia" />
+    <input class="form_input first" type="number" name="day" id="day" placeholder="dia" required/>
     <input class="form_input second" type="number" name="month" id="month" placeholder="mes" />
-    <input class="form_input third" type="number" name="year" id="year" placeholder="año" />
+    <input class="form_input third" type="number" name="year" id="year" placeholder="año" required/>
   </div>
   <div class="second form_element form_element--selectText">
     <label class="form_label full" for="document">Documento identificativo</label>
-    <select class="form_input first" [(ngModel)]="user.document_type">
+    <select class="form_input first" [(ngModel)]="user.document_type" required>
       <option *ngFor="let document of documents" class="form_input" [ngValue]="document">{{document}}</option>
     </select>
     <input class="form_input second" type="text" class="form_input" name="document-number" id="document-number"
@@ -39,25 +39,26 @@
   </div>
   <div class="form_element first">
     <label for="email"></label>
-    <input class="form_input" type="email" name="email" id="email" placeholder="email" [(ngModel)]="user.email" />
+    <input class="form_input" type="email" name="email" id="email" placeholder="email" [(ngModel)]="user.email" #email="ngModel"required/>
   </div>
   <div class="form_element form_element--second">
     <label for=""></label>
-    <input class="form_input" type="email" name="confirm-email" id="confirm-email" placeholder="repite el email" />
+    <input class="form_input" (change)="checkEmails()" [(ngModel)]="user.confirmEmail" type="email" name="confirmEmail" id="confirm-email" placeholder="repite el email" #confirmEmail="ngModel" required />
   </div>
-  <div class="form_separator full"><a (click)="updateUserData()" href="#">Modificar tus datos</a></div>
+  <span class="form--error" [hidden]="!(confirmEmail.valid &&!confirmEmail.pristine && emailError)">Emails no coinciden o no es un email válido</span>
+  <button class="form_separator full" (click)="updateUserData()" [disabled]="mustMatchError">Modificar tus datos</button>
   <h2>Contraseña</h2>
   <div class="form_element first">
     <label class="form_label" for="password">Contraseña</label>
     <input class="form_input" type="password" name="password" id="password"  [(ngModel)]="user.password" required />
   </div>
   <div class="form_element second">
-    <label class="form_label" for="repeatPassword">Repetir contraseña</label>
-    <input class="form_input" type="password" name="repeatPassword" id="repeat-password"
-      [(ngModel)]="user.matchingPassword" required validateEqual="password" #repeatPassword="ngModel" />
+    <label class="form_label" for="matchingPassword">Repetir contraseña</label>
+    <input class="form_input" type="password" name="matchingPassword" id="repeat-password"
+      [(ngModel)]="user.matchingPassword" (change)="checkPasswords()" required validateEqual="password" #matchingPassword="ngModel" />
   </div>
-  <span [hidden]="repeatPassword.valid">Contraseñas no son iguales</span>
-  <div [ngClass]="{'form--error': repeatPassword.valid && !repeatPassword.pristine}" class="form_separator full"><a (click)="updateUserPassword()" [attr.disabled]="!repeatPassword.valid" href="#">Modificar Contraseña</a></div>{{repeatPassword.pristine}}
+  <span class="form--error" [hidden]=" !(matchingPassword.valid && !matchingPassword.pristine && mustMatchError)">Contraseñas no son iguales</span>
+  <button class="form_separator full"(click)="updateUserPassword()" [disabled]="mustMatchError">Modificar Contraseña</button>
   <h2>Dirección</h2>
   <div class="form_element first">
     <label for="address"></label>

@@ -7,6 +7,7 @@ export interface User {
     document_type: string;
     gender: string;
     email: string;
+    confirmEmail: string;
     password: string;
     matchingPassword: string;
     address: string;
