@@ -15,7 +15,7 @@
   </div>
   <div class="second form_element form_element--selectText">
     <label class="form_label full" for="document">Documento identificativo</label>
-    <select class="form_input first" [(ngModel)]="user.document_type" required>
+    <select class="form_input first" [(ngModel)]="user.document_type" name="document" required>
       <option *ngFor="let document of documents" class="form_input" [ngValue]="document">{{document}}</option>
     </select>
     <input class="form_input second" type="text" class="form_input" name="document-number" id="document-number"

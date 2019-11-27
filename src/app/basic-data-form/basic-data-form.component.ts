@@ -11,7 +11,8 @@ export class BasicDataFormComponent implements OnInit {
   documents = ['dni', 'passport'];
   genders = ['man', 'woman', 'noanswer'];
   mustMatchError = false;
-  constructor(private http: HttpClient) { }
+  emailError = false;
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.getUserData();
