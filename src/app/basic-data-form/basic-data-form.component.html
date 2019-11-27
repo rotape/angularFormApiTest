@@ -1,4 +1,4 @@
-<div class="form">
+<form #form="ngForm" class="form" (ngSubmit)="updateUserData()">
   <h2 class="first">Tus datos personales</h2>
   <div class="form_element first"><label for="first-name"></label>
     <input class="form_input" type="text" name="firstName" id="first-name" placeholder="Name" [(ngModel)]="user.name" required/>
@@ -39,18 +39,20 @@
   </div>
   <div class="form_element first">
     <label for="email"></label>
-    <input class="form_input" type="email" name="email" id="email" placeholder="email" [(ngModel)]="user.email" #email="ngModel"required/>
+    <input class="form_input" type="email" name="email" id="email" placeholder="email" [(ngModel)]="user.email" #email="ngModel"required email/>
   </div>
   <div class="form_element form_element--second">
     <label for=""></label>
-    <input class="form_input" (change)="checkEmails()" [(ngModel)]="user.confirmEmail" type="email" name="confirmEmail" id="confirm-email" placeholder="repite el email" #confirmEmail="ngModel" required />
+    <input class="form_input" (change)="checkEmails()" [(ngModel)]="user.confirmEmail" type="email" name="confirmEmail" id="confirm-email" placeholder="repite el email" #confirmEmail="ngModel" required email/>
   </div>
-  <span class="form--error" [hidden]="!(confirmEmail.valid &&!confirmEmail.pristine && emailError)">Emails no coinciden o no es un email válido</span>
-  <button class="form_separator full" (click)="updateUserData()" [disabled]="mustMatchError">Modificar tus datos</button>
+  <span class="form--error" [hidden]="!emailError">Emails no coinciden o no es un email válido</span>
+  <button type="submit" [disabled]="!form.valid" class="form_separator full">Modificar tus datos</button>
+</form>
+<form #passwordForm="ngForm" class="form" (ngSubmit)="updateUserPassword()" >
   <h2>Contraseña</h2>
   <div class="form_element first">
     <label class="form_label" for="password">Contraseña</label>
-    <input class="form_input" type="password" name="password" id="password"  [(ngModel)]="user.password" required />
+    <input class="form_input" (change)="checkPasswords()" type="password" name="password" id="password"  [(ngModel)]="user.password" required />
   </div>
   <div class="form_element second">
     <label class="form_label" for="matchingPassword">Repetir contraseña</label>
@@ -58,11 +60,13 @@
       [(ngModel)]="user.matchingPassword" (change)="checkPasswords()" required validateEqual="password" #matchingPassword="ngModel" />
   </div>
   <span class="form--error" [hidden]=" !(matchingPassword.valid && !matchingPassword.pristine && mustMatchError)">Contraseñas no son iguales</span>
-  <button class="form_separator full"(click)="updateUserPassword()" [disabled]="mustMatchError">Modificar Contraseña</button>
+  <button type="submit" class="form_separator full" [disabled]="!passwordForm.valid">Modificar Contraseña</button>
+</form>
+<form #addressForm="ngForm" class="form" >
   <h2>Dirección</h2>
   <div class="form_element first">
     <label for="address"></label>
-    <input class="form_input" type="text" name="address" id="address" placeholder="dirección"
+    <input class="form_input" (change)="updateUserData()" type="text" name="address" id="address" placeholder="dirección"
       [(ngModel)]="user.address" />
   </div>
-</div>
+</form>

@@ -16,16 +16,9 @@ export class BasicDataFormComponent implements OnInit {
   ngOnInit() {
     this.getUserData();
   }
-
-  updateUserData() {
-    this.http.put(`https://my-json-server.typicode.com/volkz/technical-form/users/${this.user.id}`, this.user).subscribe((res: User) => {
-      this.user = res;
-    });
-  }
-
   checkEmails() {
     const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (this.user.email !== this.user.compareEmail || !regex.test(this.user.email)) {
+      if (this.user.email !== this.user.confirmEmail || !regex.test(this.user.email)) {
         this.emailError = true;
       } else {
         this.emailError = false;
@@ -38,14 +31,17 @@ export class BasicDataFormComponent implements OnInit {
         this.mustMatchError = false;
     }
   }
-
   updateUserPassword() {
     this.http.put(`https://my-json-server.typicode.com/volkz/technical-form/users/${this.user.id}`,
     this.user).subscribe((res: User) => {
       this.user = res;
     });
   }
-
+  updateUserData() {
+    this.http.put(`https://my-json-server.typicode.com/volkz/technical-form/users/${this.user.id}`, this.user).subscribe((res: User) => {
+      this.user = res;
+    });
+  }
   getUserData(user?: number) {
     let value: number;
     user ? value = user : value = 1;
